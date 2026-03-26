@@ -17,3 +17,15 @@ variable "credentials_file" {
   description = "Path to GCP service account key JSON file"
   default     = "~/.config/gcloud/application_default_credentials.json"
 }
+variable "vm_type" {
+  type = string
+}
+variable "vm_image" {
+  type = string
+}
+variable "vm_storage_size" {
+  type = number
+}
+variable "vpc_cidr" {
+  type = string
+}
