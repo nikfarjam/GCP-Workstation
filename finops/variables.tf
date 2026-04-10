@@ -1,7 +1,10 @@
 variable "billing_account_id" {
-  type = string
+  description = "The ID of the billing account"
+  type        = string
 }
+
 variable "cloud_budget" {
-  type    = number
-  default = 50
+  description = "The monthly budget amount"
+  type        = number
+  default     = 50
 }

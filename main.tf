@@ -11,10 +11,12 @@ module "network" {
 }
 
 module "workspace" {
-  source          = "./compute"
-  region          = var.region
-  subnet_id       = module.network.subnet_id
-  vm_type         = var.vm_type
-  vm_image        = var.vm_image
-  vm_storage_size = var.vm_storage_size
+  source            = "./compute"
+  region            = var.region
+  subnet_id         = module.network.subnet_id
+  vm_type           = var.vm_type
+  vm_image          = var.vm_image
+  vm_storage_size   = var.vm_storage_size
+  accelerator_count = var.accelerator_count
+  zone              = var.zone
 }
