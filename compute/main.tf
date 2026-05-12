@@ -1,11 +1,21 @@
+locals {
+  common_tags = merge(
+    {
+      Module = "network"
+    },
+    var.common_tags
+  )
+}
+
 resource "google_service_account" "workstation_sa" {
   account_id = "workstation-sa"
 }
 
 resource "google_compute_instance" "workstation_vm" {
-  name         = "workstation-vm"
-  machine_type = var.vm_type
-  zone         = "${var.region}-a"
+  name                      = "workstation-vm"
+  machine_type              = var.vm_type
+  zone                      = var.zone != null ? var.zone : "${var.region}-a"
+  allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
@@ -15,9 +25,12 @@ resource "google_compute_instance" "workstation_vm" {
     }
   }
 
-  guest_accelerator {
-    type  = "nvidia-l4"
-    count = var.accelerator_count
+  dynamic "guest_accelerator" {
+    for_each = var.accelerator_count > 0 ? [1] : []
+    content {
+      type  = "nvidia-l4"
+      count = var.accelerator_count
+    }
   }
 
   scheduling {
@@ -36,7 +49,5 @@ resource "google_compute_instance" "workstation_vm" {
     scopes = ["cloud-platform"]
   }
 
-  labels = {
-    environment = "dev"
-  }
+  labels = local.common_tags
 }
