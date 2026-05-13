@@ -1,10 +1,3 @@
-# FinOps module manages billing budgets and cost monitoring
-module "finops" {
-  source             = "./finops"
-  billing_account_id = var.billing_account_id
-  cloud_budget       = var.cloud_budget
-}
-
 # Network module manages VPC, subnets, firewalls, and NAT
 module "network" {
   source   = "./network"
