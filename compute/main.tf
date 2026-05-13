@@ -1,7 +1,7 @@
 locals {
   common_tags = merge(
     {
-      Module = "network"
+      module = "network"
     },
     var.common_tags
   )
