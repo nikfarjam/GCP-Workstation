@@ -1,18 +1,41 @@
 variable "region" {
-  type = string
+  description = "The region where the VM will be created"
+  type        = string
 }
+
+variable "zone" {
+  description = "The zone where the VM will be created. If not provided, it defaults to {region}-a"
+  type        = string
+  default     = null
+}
+
 variable "vm_type" {
-  type = string
+  description = "The machine type to use for the VM"
+  type        = string
 }
+
 variable "vm_image" {
-  type = string
+  description = "The image to use for the VM boot disk"
+  type        = string
 }
+
 variable "vm_storage_size" {
-  type = number
+  description = "The size of the boot disk in GB"
+  type        = number
 }
+
 variable "accelerator_count" {
-  default = 0
+  description = "The number of accelerators to attach to the VM"
+  type        = number
+  default     = 0
 }
+
 variable "subnet_id" {
-  type = string
+  description = "The ID of the subnet to attach the VM to"
+  type        = string
+}
+
+variable "common_tags" {
+  description = "Common tags to apply to all network resources"
+  type        = map(string)
 }

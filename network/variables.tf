@@ -1,6 +1,9 @@
 variable "vpc_cidr" {
-  type = string
+  description = "The CIDR range for the VPC subnetwork"
+  type        = string
 }
+
 variable "region" {
-  type = string
+  description = "The region where the network resources will be created"
+  type        = string
 }
